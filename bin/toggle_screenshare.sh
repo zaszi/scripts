@@ -14,9 +14,12 @@
 #
 # Requirements:
 # - sway
-# - wf-recorder
-# - ffmpeg
 # - v4l2loopback-dkms
+# - wf-recorder
+# - jq
+#
+# This script assumes your current user has sudo rights in order to load
+# the l4d2loopback kernel module if it needs to.
 #
 # Usage: ./toggle_screenshare.sh
 
@@ -39,29 +42,22 @@ main() {
     if ! lsmod | grep v4l2loopback >/dev/null; then
         sudo modprobe v4l2loopback
     fi
-    if pgrep wf-recorder >/dev/null && pgrep ffplay >/dev/null; then
-        if pgrep ffplay >/dev/null; then
-            pkill ffplay >/dev/null
-        fi
-        if pgrep wf-recorder >/dev/null; then
-            pkill wf-recorder >/dev/null
-        fi
+
+    if pgrep wf-recorder >/dev/null; then
+        pkill -2 wf-recorder >/dev/null
         notify-send -t 2000 "Stopped screen sharing"
     else
-        if ! pgrep wf-recorder >/dev/null; then
-            geometry=$(geometry) || exit $?
-            wf-recorder --muxer=v4l2 --codec=rawvideo --file=/dev/video2 --geometry="$geometry" >/dev/null &
-        fi
-        if ! pgrep ffplay; then
-            swaymsg assign [ class=ffplay ] workspace 11
+        unset SDL_VIDEODRIVER
+        geometry=$(geometry) || exit $?
 
-            unset SDL_VIDEODRIVER
-            ffplay /dev/video2 -fflags nobuffer -loglevel quiet &
-            sleep 0.5
-            swaymsg [ class=ffplay ] floating enable
-        fi
         notify-send -t 2000 "Started screen sharing"
+        wf-recorder -c rawvideo --geometry="$geometry" -m sdl -f pipe:wayland-mirror &
+
+        swaymsg assign [ class=wf-recorder ] workspace 11
+        swaymsg [ class=wf-recorder ] floating enable
+
     fi
+
 }
 
 main "$@"
