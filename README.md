@@ -37,4 +37,4 @@ Found a problem or have a suggestion? Feel free to open an issue.
 
 ## License
 
-Scripts is licensed under the [MIT license](https://github.com/zaszi/scripts/blob/master/LICENSE.md).
+Scripts is licensed under the [MIT license](https://github.com/zaszi/scripts/blob/master/LICENSE).
