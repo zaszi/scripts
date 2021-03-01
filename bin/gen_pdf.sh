@@ -15,7 +15,7 @@
 # - texlive-most
 # - texlive-latexextra
 #
-# Usage: ./gen_pdf.sh <input_file>.md <output_file>.pdf
+# Usage: ./gen_pdf.sh <input_file>.md <input_file>.md <output_file>.pdf
 
 # DEBUG
 # set -o xtrace
@@ -25,7 +25,12 @@ set -o pipefail
 set -o errexit
 
 main() {
-    pandoc "$1" \
+    # Retrieve all but the last argument.
+    args=${*%${!#}}
+
+    # Don't quote the variable so proper word splitting is used.
+    # shellcheck disable=SC2086
+    pandoc $args \
         --from gfm \
         --include-in-header ~/.bin/snippets/chapter_break.tex \
         --include-in-header ~/.bin/snippets/inline_code.tex \
@@ -39,7 +44,7 @@ main() {
         --variable=fontsize=10pt \
         --standalone \
         --pdf-engine=xelatex \
-        --output "$2"
+        --output "${!#}"
 }
 
 main "$@"
