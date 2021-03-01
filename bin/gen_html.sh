@@ -32,9 +32,9 @@ main() {
 
         pandoc "$filename" \
             --from gfm \
-            --include-in-header snippets/pandoc.css \
-            --lua-filter snippets/links-to-html.lua \
-            --highlight-style snippets/pygments.theme \
+            --include-in-header ~/.bin/snippets/pandoc.css \
+            --lua-filter ~/.bin/snippets/links-to-html.lua \
+            --highlight-style ~/.bin/snippets/pygments.theme \
             --standalone \
             --output "${1}/html/${name}.html"
     done

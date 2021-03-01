@@ -27,10 +27,10 @@ set -o errexit
 main() {
     pandoc "$1" \
         --from gfm \
-        --include-in-header snippets/chapter_break.tex \
-        --include-in-header snippets/inline_code.tex \
-        --include-in-header snippets/bullet_style.tex \
-        --highlight-style snippets/pygments.theme \
+        --include-in-header ~/.bin/snippets/chapter_break.tex \
+        --include-in-header ~/.bin/snippets/inline_code.tex \
+        --include-in-header ~/.bin/snippets/bullet_style.tex \
+        --highlight-style ~/.bin/snippets/pygments.theme \
         --variable=linkcolor:blue \
         --variable=geometry:a4paper \
         --variable=geometry:margin=2cm \
