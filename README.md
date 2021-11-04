@@ -23,10 +23,6 @@ A Bash script invoking Pandoc in order to convert one or more GitHub-Flavored-Ma
 
 A Bash script invoking Pandoc in order to convert one or more GitHub-Flavored-Markdown files to PDF.
 
-### toggle_screenshare.sh
-
-A Bash script to toggle screen sharing on Sway. It captures the current screen in a video device and exposes it again as an XWayland window, allowing it to be shared as a window in various applications such as Discord and Google Meet.
-
 ### wake_crimson.sh
 
 A Bash script to Wake-On-LAN a specific host named crimson. The call is relayed through a bastion server, named chimera.
