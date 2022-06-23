@@ -1,16 +1,16 @@
 #!/bin/env bash
 
-# wake_crimson.sh
+# wake_shale.sh
 #
 # Author: Zaszi - admin@zaszi.net
 #
-# Wake-On-LAN crimson, relayed through the bastion host chimera.
+# Wake-On-LAN shale, relayed through the bastion host galena.
 #
 # Requirements:
 # - SSH access to the network bastion.
 # - The wol (Wake-On_LAN) package must be installed on the bastion.
 #
-# Usage: ./wake_crimson.sh
+# Usage: ./wake_shale.sh
 
 # DEBUG
 # set -o xtrace
@@ -20,8 +20,8 @@ set -o pipefail
 set -o errexit
 
 main() {
-    declare -r bastion="chimera"
-    declare -r target="54:a0:50:df:fe:f2"
+    declare -r bastion="galena"
+    declare -r target="24:4b:fe:e1:b7:e0"
 
     /usr/bin/ssh $bastion "/usr/bin/wol --port=9 $target"
 }

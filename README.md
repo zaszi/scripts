@@ -23,9 +23,9 @@ A Bash script invoking Pandoc in order to convert one or more GitHub-Flavored-Ma
 
 A Bash script invoking Pandoc in order to convert one or more GitHub-Flavored-Markdown files to PDF.
 
-### wake_crimson.sh
+### wake_shale.sh
 
-A Bash script to Wake-On-LAN a specific host named crimson. The call is relayed through a bastion server, named chimera.
+A Bash script to Wake-On-LAN a specific host named shale. The call is relayed through a bastion server, named galena.
 
 ## Contribution
 
